@@ -12,6 +12,7 @@ use Spatie\Backup\Events\CleanupWasSuccessful;
 use Spatie\Backup\Events\HealthyBackupWasFound;
 use Spatie\Backup\Events\UnhealthyBackupWasFound;
 use Spatie\Backup\Exceptions\NotificationCouldNotBeSent;
+use Illuminate\Support\Facades\Notification as NotificationFacade;
 
 class EventHandler
 {
@@ -29,16 +30,19 @@ class EventHandler
             $notifiable = $this->determineNotifiable();
 
             $notification = $this->determineNotification($event);
-
-            $notifiable->notify($notification);
+            NotificationFacade::send($notifiable, $notification);
         });
     }
 
     protected function determineNotifiable()
     {
-        $notifiableClass = $this->config->get('backup.notifications.notifiable');
+        $notifiable = $this->config->get('backup.notifications.notifiable');
 
-        return app($notifiableClass);
+        if (is_callable($notifiable)) {
+            return call_user_func($notifiable);
+        }
+
+        return app($notifiable);
     }
 
     protected function determineNotification($event): Notification

@@ -38,6 +38,14 @@ class HealthyBackupWasFound extends BaseNotification
             });
     }
 
+    public function toArray(): array
+    {
+        return [
+            'status' => 'OK',
+            'backup_destination_props' => $this->backupDestinationProperties()->toArray(),
+        ];
+    }
+
     public function setEvent(HealthyBackupWasFoundEvent $event)
     {
         $this->event = $event;

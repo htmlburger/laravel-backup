@@ -69,6 +69,15 @@ class UnhealthyBackupWasFound extends BaseNotification
         return $slackMessage;
     }
 
+    public function toArray(): array
+    {
+        return [
+            'status' => 'Uncertain :)',
+            'health_check' => $this->failure()->healthCheck()->name(),
+            'error_message' => $this->failure()->exception()->getMessage(),
+        ];
+    }
+
     protected function problemDescription(): string
     {
         if ($this->failure()->wasUnexpected()) {

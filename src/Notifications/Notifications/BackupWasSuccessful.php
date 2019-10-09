@@ -38,6 +38,14 @@ class BackupWasSuccessful extends BaseNotification
             });
     }
 
+    public function toArray(): array
+    {
+        return [
+            'status' => 'OK',
+            'backup_destination_props' => $this->backupDestinationProperties()->toArray(),
+        ];
+    }
+
     public function setEvent(BackupWasSuccessfulEvent $event)
     {
         $this->event = $event;

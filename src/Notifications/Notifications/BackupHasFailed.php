@@ -50,6 +50,15 @@ class BackupHasFailed extends BaseNotification
                 $attachment->fields($this->backupDestinationProperties()->toArray());
             });
     }
+    public function toArray(): array
+    {
+        return [
+            'status' => 'error',
+            'message' => $this->event->exception->getMessage(),
+            'error_trace' => $this->event->exception->getTraceAsString(),
+            'backup_destination_props' => $this->backupDestinationProperties()->toArray(),
+        ];
+    }
 
     public function setEvent(BackupHasFailedEvent $event)
     {
