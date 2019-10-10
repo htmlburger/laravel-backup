@@ -42,6 +42,7 @@ class BackupWasSuccessful extends BaseNotification
     {
         return [
             'status' => 'OK',
+            'backup_name' => $this->backupName(),
             'backup_destination_props' => $this->backupDestinationProperties()->toArray(),
         ];
     }

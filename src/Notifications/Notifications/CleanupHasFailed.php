@@ -55,6 +55,7 @@ class CleanupHasFailed extends BaseNotification
     {
         return [
             'status' => 'error',
+            'backup_name' => $this->backupName(),
             'message' => $this->event->exception->getMessage(),
             'error_trace' => $this->event->exception->getTraceAsString(),
             'backup_destination_props' => $this->backupDestinationProperties()->toArray(),

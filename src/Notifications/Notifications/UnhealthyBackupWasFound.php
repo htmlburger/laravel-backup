@@ -72,7 +72,8 @@ class UnhealthyBackupWasFound extends BaseNotification
     public function toArray(): array
     {
         return [
-            'status' => 'Uncertain :)',
+            'status' => 'N/A',
+            'backup_name' => $this->backupName(),
             'health_check' => $this->failure()->healthCheck()->name(),
             'error_message' => $this->failure()->exception()->getMessage(),
         ];
