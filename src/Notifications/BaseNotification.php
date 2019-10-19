@@ -23,12 +23,18 @@ abstract class BaseNotification extends Notification
 
     public function backupName(): string
     {
-        return $this->backupDestination()->backupName();
+        if ($this->backupDestination()) {
+            return $this->backupDestination()->backupName();
+        }
+        return 'N/A';
     }
 
     public function diskName(): string
     {
-        return $this->backupDestination()->diskName();
+        if ($this->backupDestination()) {
+            return $this->backupDestination()->diskName();
+        }
+        return 'N/A';
     }
 
     protected function backupDestinationProperties(): Collection
