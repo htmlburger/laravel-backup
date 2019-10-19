@@ -57,7 +57,7 @@ class BackupHasFailed extends BaseNotification
             'backup_name' => $this->backupName(),
             'message' => $this->event->exception->getMessage(),
             'error_trace' => $this->event->exception->getTraceAsString(),
-            'backup_destination_props' => $this->backupDestinationProperties()->toArray(),
+            'backup_destination_props' => []
         ];
     }
 

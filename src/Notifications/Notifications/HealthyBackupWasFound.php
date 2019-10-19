@@ -43,7 +43,7 @@ class HealthyBackupWasFound extends BaseNotification
         return [
             'status' => 'OK',
             'backup_name' => $this->backupName(),
-            'backup_destination_props' => $this->collectNotificationMetaData(),
+            'backup_destination_props' => $this->backupDestinationProperties(),
         ];
     }
 
